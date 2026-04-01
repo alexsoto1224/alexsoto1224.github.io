@@ -108,7 +108,7 @@
     .divider { width: 36px; height: 1px; background: var(--accent); margin-bottom: 32px; }
 
     /* ── HOME (combined with bio) ── */
-    #home { display: flex; align-items: center; gap: 80px; }
+    #home { display: flex; align-items: center; justify-content: center; gap: 80px; }
 
     .home-left { flex: 1; min-width: 0; }
     .home-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.03em; }
@@ -449,7 +449,7 @@
       <div class="contact-list">
         <div class="contact-row">
           <span class="contact-label">Email</span>
-          <a href="mailto:youremail@example.com">youremail@example.com</a>
+          <a href="/cdn-cgi/l/email-protection#631a0c1611060e020a0f23061b020e130f064d000c0e"><span class="__cf_email__" data-cfemail="9ee7f1ebecfbf3fff7f2defbe6fff3eef2fbb0fdf1f3">[email&#160;protected]</span></a>
         </div>
         <div class="contact-row">
           <span class="contact-label">GitHub</span>
@@ -465,15 +465,8 @@
   </main>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function show(id) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    const labels = ['home','projects','experience','resume','contact'];
-    const idx = labels.indexOf(id);
-    if (idx !== -1) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
-  }
-</script>
-</body>
-</html>
+    document.getElementById(id).clas
