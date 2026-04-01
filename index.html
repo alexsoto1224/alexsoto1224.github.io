@@ -93,7 +93,7 @@
     #home { display: flex; align-items: center; justify-content: center; gap: 80px; }
     .home-left { flex: 1; min-width: 0; max-width: 520px; }
     .home-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.03em; }
-    .home-bio { font-size: 0.9rem; line-height: 1.82; color: #666; margin-bottom: 36px; }
+    .home-bio { font-size: 0.9rem; line-height: 1.82; color: #666; margin-bottom: 52px; }
     .home-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
     .btn-primary {
@@ -224,10 +224,14 @@
       <div class="home-left">
         <div class="eyebrow">Welcome</div>
         <h1>Alex Soto</h1>
-        <p class="home-sub">Circuit Design &nbsp;·&nbsp; Hardware/Software &nbsp;·&nbsp; Deep Learning</p>
-        I'm a senior at Stanford studying Electrical Engineering (BS '26, MS '27), specializing in Integrated Circuit Design and Computer Architecture. I'm passionate about power-efficient chip design for AI — building the hardware that makes intelligent systems faster and more sustainable. I'm currently looking for engineering opportunities across the hardware/software spectrum.
-	
-	</p>
+        <p class="home-sub">Aspiring Developer &nbsp;·&nbsp; Student</p>
+        <p class="home-bio">
+          <!-- Replace this with your real bio -->
+          I'm a computer science student with a passion for building clean, useful things.
+          I love working at the intersection of design and engineering — whether that's a
+          polished web interface or a backend system that just works. Currently looking for
+          opportunities to grow and contribute.
+        </p>
         <div class="home-actions">
           <button class="btn-primary" onclick="show('projects')">View My Work</button>
           <a class="btn-secondary" href="resume.pdf" target="_blank">Download Resume</a>
@@ -407,7 +411,7 @@
       <div class="contact-list">
         <div class="contact-row">
           <span class="contact-label">Email</span>
-          <a href="mailto:youremail@example.com">youremail@example.com</a>
+          <a href="/cdn-cgi/l/email-protection#9ee7f1ebecfbf3fff7f2defbe6fff3eef2fbb0fdf1f3"><span class="__cf_email__" data-cfemail="f980968c8b9c94989095b99c81989489959cd79a9694">[email&#160;protected]</span></a>
         </div>
         <div class="contact-row">
           <span class="contact-label">GitHub</span>
@@ -423,15 +427,8 @@
   </main>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function show(id) {
     document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
     document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
-    document.getElementById(id).classList.add('active');
-    var labels = ['home', 'projects', 'experience', 'courses', 'resume', 'contact'];
-    var idx = labels.indexOf(id);
-    if (idx !== -1) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
-  }
-</script>
-</body>
-</html>
+    document.getElementById(id).classList.add('
