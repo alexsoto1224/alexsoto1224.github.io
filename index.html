@@ -2,57 +2,478 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alex Soto | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --surface: #ffffff;
+      --border: #e8e4df;
+      --accent: #9b1c1c;
+      --accent-light: #fdf2f2;
+      --text: #1a1a1a;
+      --muted: #8a8480;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 300; }
+
+    /* ── Shell ── */
+    .shell { display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+    /* ── Top Nav ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: stretch;
+      padding: 0 48px;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      padding-right: 40px;
+      margin-right: 16px;
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      color: var(--muted);
+      font-family: var(--font-sans);
+      font-size: 0.73rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 20px 18px;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover { color: var(--text); }
+    .nav-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ── Main content ── */
+    main { flex: 1; overflow: hidden; position: relative; }
+
+    .section {
+      position: absolute;
+      inset: 0;
+      padding: 56px 72px;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+    .section.active { opacity: 1; transform: translateY(0); pointer-events: all; }
+
+    /* ── Typography ── */
+    .eyebrow {
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 4.5vw, 4rem);
+      font-weight: 600;
+      line-height: 1.06;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 600; color: var(--text); margin-bottom: 24px; }
+    h3 { font-family: var(--font-sans); font-size: 0.92rem; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .divider { width: 36px; height: 1px; background: var(--accent); margin-bottom: 32px; }
+
+    /* ── HOME (combined with bio) ── */
+    #home { display: flex; align-items: center; gap: 80px; }
+
+    .home-left { flex: 1; min-width: 0; }
+    .home-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.03em; }
+    .home-bio {
+      font-size: 0.9rem;
+      line-height: 1.82;
+      color: #666;
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+    .home-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 13px 26px;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 26px;
+      border: 1px solid var(--accent);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { background: var(--accent); color: #fff; }
+
+    /* Profile photo placeholder */
+    .home-photo {
+      width: 240px;
+      height: 300px;
+      flex-shrink: 0;
+      background: var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+    }
+    .home-photo svg { opacity: 0.35; }
+    /* To use a real photo, replace .home-photo div with:
+       <img src="your-photo.jpg" class="home-photo" style="object-fit:cover"> */
+
+    /* ── PROJECTS ── */
+    .projects-list { display: flex; flex-direction: column; gap: 48px; }
+    .project-entry { display: flex; flex-direction: column; gap: 16px; }
+    .project-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    .project-header h3 { font-size: 1rem; color: var(--accent); }
+    .project-desc { font-size: 0.87rem; color: #666; line-height: 1.7; max-width: 640px; }
+    .tech-stack { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tech {
+      font-size: 0.67rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--muted); background: var(--bg); border: 1px solid var(--border); padding: 3px 10px;
+    }
+
+    /* Media grid — add as many items as you want */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .media-grid img,
+    .media-grid video {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      display: block;
+      background: var(--border);
+    }
+    /* Image placeholder tile */
+    .media-placeholder {
+      aspect-ratio: 16/10;
+      background: var(--accent-light);
+      border: 1px dashed #d9a0a0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: #c07070;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: default;
+    }
+    .media-placeholder svg { opacity: 0.5; }
+
+    .project-divider { border: none; border-top: 1px solid var(--border); margin-top: 8px; }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 48px; }
+    .exp-entry { display: flex; flex-direction: column; gap: 14px; }
+    .exp-header { display: flex; flex-direction: column; gap: 4px; }
+    .exp-meta { font-size: 0.73rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+    .exp-desc { font-size: 0.87rem; color: #666; line-height: 1.72; max-width: 640px; }
+    .exp-divider { border: none; border-top: 1px solid var(--border); margin-top: 8px; }
+
+    /* ── RESUME ── */
+    #resume { display: flex; flex-direction: column; justify-content: center; }
+    .resume-note { font-size: 0.87rem; color: var(--muted); line-height: 1.75; max-width: 400px; margin-bottom: 28px; }
+
+    /* ── CONTACT ── */
+    .contact-list { display: flex; flex-direction: column; max-width: 460px; }
+    .contact-row { display: flex; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; }
+    .contact-row:first-child { border-top: 1px solid var(--border); }
+    .contact-label { min-width: 100px; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .contact-row a { color: var(--text); text-decoration: none; }
+    .contact-row a:hover { color: var(--accent); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      nav { padding: 0 16px; overflow-x: auto; }
+      .nav-logo { padding-right: 20px; margin-right: 8px; font-size: 0.9rem; }
+      .section { padding: 32px 24px; }
+      #home { flex-direction: column-reverse; gap: 32px; align-items: flex-start; }
+      .home-photo { width: 100%; height: 200px; }
+    }
+  </style>
 </head>
 <body>
+<div class="shell">
 
-  <!-- Home / Hero -->
-  <section id="home">
-    <h1>Alex Soto</h1>
-    <p>Aspiring Developer | Student</p>
-  </section>
+  <!-- Top Navigation -->
+  <nav>
+    <div class="nav-logo">Alex Soto</div>
+    <button class="nav-btn active"  onclick="show('home')">Home</button>
+    <button class="nav-btn"         onclick="show('projects')">Projects</button>
+    <button class="nav-btn"         onclick="show('experience')">Experience</button>
+    <button class="nav-btn"         onclick="show('resume')">Resume</button>
+    <button class="nav-btn"         onclick="show('contact')">Contact</button>
+  </nav>
 
-  <!-- About Me -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Short intro about yourself, your interests, and your skills.</p>
-  </section>
+  <main>
 
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project One</h3>
-      <p>Description + tech used</p>
-    </div>
-    <div class="project">
-      <h3>Project Two</h3>
-      <p>Description + tech used</p>
-    </div>
-  </section>
+    <!-- ═══════════════════════════════════════
+         HOME  (bio lives here now)
+    ════════════════════════════════════════ -->
+    <section class="section active" id="home">
+      <div class="home-left">
+        <div class="eyebrow">Welcome</div>
+        <h1>Alex Soto</h1>
+        <p class="home-sub">Aspiring Developer &nbsp;·&nbsp; Student</p>
+        <p class="home-bio">
+          <!-- ✏️  Replace this with your real bio (2–4 sentences) -->
+          I'm a computer science student with a passion for building clean, useful things.
+          I love working at the intersection of design and engineering — whether that's a
+          polished web interface or a backend system that just works. Currently looking for
+          opportunities to grow and contribute.
+        </p>
+        <div class="home-actions">
+          <button class="btn-primary" onclick="show('projects')">View My Work</button>
+          <a class="btn-secondary" href="resume.pdf" target="_blank">Download Resume</a>
+        </div>
+      </div>
 
-  <!-- Work Experience -->
-  <section id="experience">
-    <h2>Work Experience</h2>
-    <div class="job">
-      <h3>Job Title | Company</h3>
-      <p>Dates, responsibilities, achievements</p>
-    </div>
-  </section>
+      <!-- Profile photo — replace src with your image path, e.g. src="photo.jpg" -->
+      <div class="home-photo">
+        <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
+        </svg>
+        Your photo here
+      </div>
+    </section>
 
-  <!-- Resume -->
-  <section id="resume">
-    <h2>Resume</h2>
-    <a href="resume.pdf" target="_blank">Download Resume</a>
-  </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: youremail@example.com</p>
-    <p>GitHub: <a href="https://github.com/alexsoto1224" target="_blank">github.com/alexsoto1224</a></p>
-  </section>
+    <!-- ═══════════════════════════════════════
+         PROJECTS
+         To add a project: copy one .project-entry block.
+         To add media:
+           Images  → <img src="your-image.jpg" alt="description">
+           Videos  → <video src="your-video.mp4" controls></video>
+           YouTube → <iframe ...> (replace a .media-placeholder)
+         Remove .media-placeholder tiles when you have real media.
+    ════════════════════════════════════════ -->
+    <section class="section" id="projects">
+      <div class="eyebrow">Work</div>
+      <h2>Projects</h2>
+      <div class="divider"></div>
 
+      <div class="projects-list">
+
+        <!-- PROJECT 1 -->
+        <div class="project-entry">
+          <div class="project-header">
+            <h3>Project One</h3>
+            <div class="tech-stack">
+              <span class="tech">React</span>
+              <span class="tech">Node.js</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            Describe what this project does, the problem it solves, and your role in building it.
+          </p>
+          <!-- 📸 Media grid — add/remove items freely -->
+          <div class="media-grid">
+            <img src="project1-screenshot1.jpg" alt="Project One screenshot 1">
+            <img src="project1-screenshot2.jpg" alt="Project One screenshot 2">
+            <video src="project1-demo.mp4" controls></video>
+            <!-- ↑ Replace src values with your real file names -->
+          </div>
+        </div>
+        <hr class="project-divider">
+
+        <!-- PROJECT 2 -->
+        <div class="project-entry">
+          <div class="project-header">
+            <h3>Project Two</h3>
+            <div class="tech-stack">
+              <span class="tech">Python</span>
+              <span class="tech">Flask</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            Describe what this project does, the problem it solves, and your role in building it.
+          </p>
+          <div class="media-grid">
+            <img src="project2-screenshot1.jpg" alt="Project Two screenshot 1">
+            <img src="project2-screenshot2.jpg" alt="Project Two screenshot 2">
+          </div>
+        </div>
+        <hr class="project-divider">
+
+        <!-- PROJECT 3 -->
+        <div class="project-entry">
+          <div class="project-header">
+            <h3>Project Three</h3>
+            <div class="tech-stack">
+              <span class="tech">HTML</span>
+              <span class="tech">CSS</span>
+              <span class="tech">JS</span>
+            </div>
+          </div>
+          <p class="project-desc">
+            Describe what this project does, the problem it solves, and your role in building it.
+          </p>
+          <div class="media-grid">
+            <img src="project3-screenshot1.jpg" alt="Project Three screenshot 1">
+          </div>
+        </div>
+
+      </div><!-- /projects-list -->
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         EXPERIENCE
+         To add a role: copy one .exp-entry block.
+         To add media: same pattern as projects above.
+    ════════════════════════════════════════ -->
+    <section class="section" id="experience">
+      <div class="eyebrow">Background</div>
+      <h2>Experience</h2>
+      <div class="divider"></div>
+
+      <div class="exp-list">
+
+        <!-- JOB 1 -->
+        <div class="exp-entry">
+          <div class="exp-header">
+            <h3>Job Title &nbsp;·&nbsp; Company Name</h3>
+            <p class="exp-meta">Jan 2024 – Present</p>
+          </div>
+          <p class="exp-desc">
+            Describe your responsibilities and key achievements. What did you build, improve, or contribute?
+            Focus on concrete impact.
+          </p>
+          <!-- 📸 Add photos/screenshots from this role -->
+          <div class="media-grid">
+            <img src="job1-photo1.jpg" alt="Company name photo 1">
+            <img src="job1-photo2.jpg" alt="Company name photo 2">
+            <video src="job1-demo.mp4" controls></video>
+          </div>
+        </div>
+        <hr class="exp-divider">
+
+        <!-- JOB 2 -->
+        <div class="exp-entry">
+          <div class="exp-header">
+            <h3>Previous Role &nbsp;·&nbsp; Company Name</h3>
+            <p class="exp-meta">Jun 2023 – Dec 2023</p>
+          </div>
+          <p class="exp-desc">
+            What did you learn, and what value did you add? Keep it outcome-focused.
+          </p>
+          <div class="media-grid">
+            <img src="job2-photo1.jpg" alt="Previous company photo 1">
+          </div>
+        </div>
+
+      </div><!-- /exp-list -->
+    </section>
+
+
+    <!-- ═══════════════════════════════════════  RESUME  ══ -->
+    <section class="section" id="resume">
+      <div class="eyebrow">Resume</div>
+      <h2>Download my CV</h2>
+      <div class="divider"></div>
+      <p class="resume-note">
+        My full resume covers my education, skills, and professional experience in detail.
+      </p>
+      <a class="btn-secondary" href="resume.pdf" target="_blank">↓ &nbsp; Download Resume</a>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════  CONTACT  ══ -->
+    <section class="section" id="contact">
+      <div class="eyebrow">Get in Touch</div>
+      <h2>Contact</h2>
+      <div class="divider"></div>
+      <div class="contact-list">
+        <div class="contact-row">
+          <span class="contact-label">Email</span>
+          <a href="mailto:youremail@example.com">youremail@example.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">GitHub</span>
+          <a href="https://github.com/alexsoto1224" target="_blank">github.com/alexsoto1224</a>
+        </div>
+        <div class="contact-row">
+          <span class="contact-label">LinkedIn</span>
+          <a href="#" target="_blank">your-linkedin</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const labels = ['home','projects','experience','resume','contact'];
+    const idx = labels.indexOf(id);
+    if (idx !== -1) document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  }
+</script>
 </body>
 </html>
