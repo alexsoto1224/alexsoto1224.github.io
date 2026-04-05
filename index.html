@@ -93,7 +93,7 @@
     #home { display: flex; align-items: center; justify-content: center; gap: 80px; }
     .home-left { flex: 1; min-width: 0; max-width: 520px; }
     .home-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.03em; }
-    .home-bio { font-size: 0.9rem; line-height: 1.82; color: #666; margin-bottom: 36px; }
+    .home-bio { font-size: 0.9rem; line-height: 1.82; color: #666; margin-bottom: 52px; }
     .home-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
     .btn-primary {
@@ -132,19 +132,9 @@
       width: 240px;
       height: 300px;
       flex-shrink: 0;
-      background: var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      object-fit: cover;
       border: 1px solid var(--border);
     }
-    .home-photo svg { opacity: 0.35; }
 
     /* ── PROJECTS ── */
     .projects-list { display: flex; flex-direction: column; gap: 48px; }
@@ -225,26 +215,20 @@
         <h1>Alex Soto</h1>
         <p class="home-sub">Circuit Design &nbsp;·&nbsp; Hardware/Software &nbsp;·&nbsp; Deep Learning</p>
         <p class="home-bio">
-          <!-- Replace this with your real bio -->
-        I'm an electrical engineering student at Stanford (BS '26, MS '27) with a focus on Integrated Circuit Design and Computer Architecture.
-	I also have a passion for power-efficient chip design for AI.
-	Currently, I'm looking for engineering opportunities anywhere across the hardware/software spectrum.
-	</p>
+          I'm an electrical engineering student at Stanford (BS '26, MS '27) with a focus on Integrated Circuit Design and Computer Architecture.
+          I also have a passion for power-efficient chip design for AI.
+          Currently, I'm looking for engineering opportunities anywhere across the hardware/software spectrum.
+        </p>
         <div class="home-actions">
           <button class="btn-primary" onclick="show('projects')">View My Work</button>
           <a class="btn-secondary" href="resume.pdf" target="_blank">Download Resume</a>
         </div>
       </div>
-
-      <img src="headshot.jpg" class="home-photo" style="object-fit:cover">
+      <img src="headshot.jpg" class="home-photo" alt="Alex Soto">
     </section>
 
 
-    <!-- PROJECTS
-         To add a project: copy a .project-entry block.
-         Images  → <img src="file.jpg" alt="description">
-         Videos  → <video src="file.mp4" controls></video>
-    -->
+    <!-- PROJECTS -->
     <section class="section" id="projects">
       <div class="eyebrow">Work</div>
       <h2>Projects</h2>
@@ -252,7 +236,7 @@
 
       <div class="projects-list">
 
-        <!-- Project 1 -->
+        <!-- PROJECT 1 -->
         <div class="project-entry">
           <div class="project-header">
             <h3>Mechatronics Curling Robot</h3>
@@ -263,8 +247,8 @@
           </div>
           <p class="project-desc">Describe what this project does, the problem it solves, and your role in building it.</p>
           <div class="media-grid">
-            <img src="team_pic.jpg" alt="Team Picture with Robot 1">
-            <img src="ir_reciever.jpg" alt="IR Reciever Schematic">
+            <img src="team_pic.jpg" alt="Team Picture with Robot">
+            <img src="ir_reciever.jpg" alt="IR Receiver Schematic">
             <video src="curling.mov" controls></video>
           </div>
         </div>
@@ -284,9 +268,9 @@
             <img src="project2-screenshot1.jpg" alt="Project Two screenshot 1">
             <img src="project2-screenshot2.jpg" alt="Project Two screenshot 2">
           </div>
-	  </div>
-	    <a class="btn-secondary" href="music_player_report.pdf" target="_blank">↗ &nbsp; View Report</a>
-	  </div>
+          <div>
+            <a class="btn-secondary" href="music_player_report.pdf" target="_blank">↗ &nbsp; View Report</a>
+          </div>
         </div>
         <hr class="project-divider">
 
@@ -310,10 +294,7 @@
     </section>
 
 
-    <!-- EXPERIENCE
-         To add a role: copy an .exp-entry block.
-         Add media the same way as projects above.
-    -->
+    <!-- EXPERIENCE -->
     <section class="section" id="experience">
       <div class="eyebrow">Background</div>
       <h2>Experience</h2>
@@ -348,16 +329,6 @@
     </section>
 
 
-    <!-- RESUME -->
-    <section class="section" id="resume">
-      <div class="eyebrow">Resume</div>
-      <h2>Download my CV</h2>
-      <div class="divider"></div>
-      <p class="resume-note">My full resume covers my education, skills, and professional experience in detail.</p>
-      <a class="btn-secondary" href="resume.pdf" target="_blank">↓ &nbsp; Download Resume</a>
-    </section>
-
-
     <!-- COURSES -->
     <section class="section" id="courses">
       <div class="eyebrow">Academic</div>
@@ -366,7 +337,7 @@
 
       <div class="exp-list">
 
-        <!-- CATEGORY 1 — group by subject or just list all individually -->
+        <!-- CATEGORY 1 -->
         <div class="exp-entry">
           <h3>Computer Science</h3>
           <div class="tech-stack" style="margin-top: 10px;">
@@ -401,6 +372,16 @@
         </div>
 
       </div>
+    </section>
+
+
+    <!-- RESUME -->
+    <section class="section" id="resume">
+      <div class="eyebrow">Resume</div>
+      <h2>Download my CV</h2>
+      <div class="divider"></div>
+      <p class="resume-note">My full resume covers my education, skills, and professional experience in detail.</p>
+      <a class="btn-secondary" href="resume.pdf" target="_blank">↓ &nbsp; Download Resume</a>
     </section>
 
 
